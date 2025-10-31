@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<derivativeTradingBot>
+  <instrument>
+    <name>Gold</name>
+    <type>Forex</type>
+  </instrument>
+  <accountManagement>
+    <accountSize>Small</accountSize>
+    <initialInvestment>100</initialInvestment>
+    <riskPercentage>2</riskPercentage>
+    <maxDrawdown>20</maxDrawdown>
+  </accountManagement>
+  <tradeParameters>
+    <tradeDuration>
+      <duration>1</duration>
+      <unit>m</unit>
+    </tradeDuration>
+    <profitTarget>
+      <percentage>5</percentage>
+    </profitTarget>
+    <stopLoss>
+      <percentage>2</percentage>
+    </stopLoss>
+  </tradeParameters>
+  <tradeLogic>
+    <buySignal>
+      <condition type="MovingAverageCrossover">
+        <shortPeriod>5</shortPeriod>
+        <longPeriod>10</longPeriod>
+      </condition>
+    </buySignal>
+    <sellSignal>
+      <condition type="ProfitTargetHit">
+        <profitTargetPercentage>5</profitTargetPercentage>
+      </condition>
+      <condition type="StopLossHit">
+        <stopLossPercentage>2</stopLossPercentage>
+      </condition>
+    </sellSignal>
+  </tradeLogic>
+  <positionSizing>
+    <method>FixedFractional</method>
+    <fixedFraction>0.1</fixedFraction>
+  </positionSizing>
+  <riskManagement>
+    <maxConsecutiveLosses>3</maxConsecutiveLosses>
+    <maxDailyLoss>10</maxDailyLoss>
+  </riskManagement>
+  <monitoring>
+    <interval>1</interval>
+    <unit>m</unit>
+    <rules>
+      <rule>
+        <condition>Profit > 5%</condition>
+        <action>Increase investment by 10%</action>
+      </rule>
+      <rule>
+        <condition>Loss > 2%</condition>
+        <action>Reduce investment by 10%</action>
+      </rule>
+    </rules>
+  </monitoring>
+</derivativeTradingBot>
+
